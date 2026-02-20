@@ -20,25 +20,49 @@ class Product:
     def show(self):
         print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
 
+    def get_quantity(self):
+        print(f"The quantity is {self.quantity}")
+
+    def set_quantity(self):
+        pass
+
+    def is_active(self):
+        if self.active == True:
+            return True
+        else:
+            return False
+
+    def activate(self):
+        self.active = True
+
+    def deactivate(self):
+        self.active = False
+
+    def buy(self,quantity):
+        return self.quantity * self.price
+
+
+
 
 try:
-    product1 = Product("MacBook Air M2", 1450, 100)
-    product1.show()
+    bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
+    bose.show()
+    bose.get_quantity()
 except Exception as e:
     print(e)
 
-try:
-    product2 = Product("apple air 4", -1600, 200)
-    product2.show()
+"""try:
+    mac = Product("MacBook Air M2", price=1450, quantity=100)
+    mac.show()
 except Exception as e:
     print(e)
 
 
 try:
-    product3 = Product("",600, 200)
-    product3.show()
+    product = Product("",600, 200)
+    product.show()
 except Exception as e:
-    print(e)
+    print(e)"""
 
 
 
