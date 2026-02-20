@@ -21,18 +21,22 @@ class Product:
 
 
     def get_quantity(self):
-        print(f"The quantity is {self.quantity}")
+        return f"The quantity is {self.quantity}"
 
 
-    def set_quantity(self):
-        if self.quantity == 0:
-            del self
+    def set_quantity(self,quantity):
+        self.quantity = quantity
+        if quantity == 0:
+            self.deactivate()
+        else:
+            self.activate()
+
+        return self.quantity
+
 
     def is_active(self):
-        if self.active == True:
-            return True
-        else:
-            return False
+       return self.active
+
 
     def activate(self):
         self.active = True
@@ -40,30 +44,49 @@ class Product:
     def deactivate(self):
         self.active = False
 
-    def buy(self,quantity_to_buy):
-        if quantity_to_buy > self.quantity:
-            print("The quantity currently is {self.quantity}")
+    def buy(self,quantity):
+        if not self.active:
+            print("Product is not active")
 
-        self.quantity = self.quantity - quantity_to_buy
-        total_price = self.quantity * self.price
-        return float(total_price), self.quantity
+        if quantity <= 0:
+            print("Quantity cannot be negative")
 
-        return total_price
+        if quantity > self.quantity:
+            return f"The quantity currently in stock is {self.quantity} and less then the quantity to buy {quantity}"
 
+        total_price = quantity  * self.price
+        self.quantity = self.quantity - quantity
 
+        if self.quantity == 0:
+            self.deactivate()
 
+        return float(total_price)
 
 
 try:
     bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
     bose.show()
-    bose.get_quantity()
+    print(bose.get_quantity())
+
+    print(bose.is_active())
+    print(bose.buy(500))
+
+    print(bose.is_active())
+    print(bose.buy(200))
+
+    print(bose.set_quantity(1000))
+    print(bose.is_active())
+    bose.show()
+
+
 except Exception as e:
     print(e)
 
 """try:
     mac = Product("MacBook Air M2", price=1450, quantity=100)
     mac.show()
+    print(mac.get_quantity())
+    print(mac.buy(200))
 except Exception as e:
     print(e)
 
