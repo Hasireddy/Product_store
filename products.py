@@ -16,15 +16,17 @@ class Product:
         self.active = True
 
 
-
     def show(self):
         print(f"{self.name}, Price: {self.price}, Quantity: {self.quantity}")
+
 
     def get_quantity(self):
         print(f"The quantity is {self.quantity}")
 
+
     def set_quantity(self):
-        pass
+        if self.quantity == 0:
+            del self
 
     def is_active(self):
         if self.active == True:
