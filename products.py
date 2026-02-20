@@ -40,8 +40,16 @@ class Product:
     def deactivate(self):
         self.active = False
 
-    def buy(self,quantity):
-        return self.quantity * self.price
+    def buy(self,quantity_to_buy):
+        if quantity_to_buy > self.quantity:
+            print("The quantity currently is {self.quantity}")
+
+        self.quantity = self.quantity - quantity_to_buy
+        total_price = self.quantity * self.price
+        return float(total_price), self.quantity
+
+        return total_price
+
 
 
 
