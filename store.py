@@ -1,26 +1,65 @@
-class Store:
-    def __init__(self, product):
-        self.product = product
-        products = []
+from products import Product
 
-    def add_product(self, product):
-        self.products.append(product)
+class Store:
+    def __init__(self, products):
+        self.products = products
+
+
+    def add_product(self, product_to_add):
+        self.products.append(product_to_add)
         return self.products
 
 
     def remove_product(self,product_remove):
-        for product in self.products:
-            if product == product_remove:
-                self.products.remove(product)
+            if product_remove in self.products:
+                self.products.remove(product_remove)
+
 
     def total_quantity(self):
-        pass
+        total_quantity = 0
+        for product in self.products:
+            total_quantity += product.quantity
+        return total_quantity
+
 
     def get_all_products(self):
-        pass
+        all_products = []
+        for item in self.products:
+            all_products.append([item.name, item.price, item.quantity])
+        return all_products
+
 
     def order(self, shopping_list):
-        pass
+        total_price = 0
+
+        for product, quantity in shopping_list:
+            total_price += product.buy(quantity)
+        return total_price
 
 
+
+
+bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
+mac = Product("MacBook Air M2", price=1450, quantity=100)
+
+best_buy = Store([bose, mac])
+
+print("All Products: ", best_buy.get_all_products())
+
+
+lenova = Product("Lenovo Asus",600, 200)
+
+total =  best_buy.add_product(lenova)
+
+print("After adding new product:")
+
+for product in total:
+    product.show()
+
+product_remove  = best_buy.remove_product(mac)
+print("After removing product:")
+print("All Products: ", best_buy.get_all_products())
+
+purchase = best_buy.order([(bose, 5),(lenova, 10)])
+print(f"The order cost: {purchase} dollars")
 
