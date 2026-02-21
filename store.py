@@ -23,10 +23,7 @@ class Store:
 
 
     def get_all_products(self):
-        all_products = []
-        for item in self.products:
-            all_products.append([item.name, item.price, item.quantity])
-        return all_products
+        return self.products
 
 
     def order(self, shopping_list):

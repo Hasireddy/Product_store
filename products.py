@@ -48,12 +48,6 @@ class Product:
         if not self.active:
             print("Product is not active")
 
-        if quantity <= 0:
-            print("Quantity cannot be negative")
-
-        if quantity > self.quantity:
-            return f"The quantity currently in stock is {self.quantity} and less then the quantity to buy {quantity}"
-
         total_price = quantity  * self.price
         self.quantity = self.quantity - quantity
 
