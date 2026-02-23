@@ -23,7 +23,8 @@ class Store:
 
 
     def get_all_products(self):
-        return self.products
+        active_products = [product for product in self.products if product.is_active()]
+        return active_products
 
 
     def order(self, shopping_list):
