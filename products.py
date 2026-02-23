@@ -21,17 +21,20 @@ class Product:
 
 
     def get_quantity(self):
-        return f"The quantity is {self.quantity}"
+        return f"The quantity is {int(self.quantity)}"
 
 
     def set_quantity(self,quantity):
+        if quantity < 0:
+            raise ValueError("Quantity cannot be negative")
+
         self.quantity = quantity
+
         if quantity == 0:
             self.deactivate()
         else:
             self.activate()
 
-        return self.quantity
 
 
     def is_active(self):
@@ -41,12 +44,21 @@ class Product:
     def activate(self):
         self.active = True
 
+
     def deactivate(self):
         self.active = False
 
+
     def buy(self,quantity):
         if not self.active:
-            print("Product is not active")
+            raise ValueError("Product not active")
+
+        if quantity <= 0:
+            raise ValueError("Quantity to buy must be greater than 0")
+
+        if quantity > self.quantity:
+            return f"The quantity to buy {quantity} exceeds the stock {self.quantity}"
+
 
         total_price = quantity  * self.price
         self.quantity = self.quantity - quantity
